@@ -84,7 +84,7 @@ class Bird:
         screen.blit(self.img, self.rct)
 
 
-def Beam():
+class Beam():
     """
     こうかとんが放つビームに関するクラス
     """
@@ -157,6 +157,7 @@ def main():
                 # スペースキー押下でBeamクラスのインスタンス生成
                 beam = Beam(bird)            
         screen.blit(bg_img, [0, 0])
+
         if bomb is not None:
             if bird.rct.colliderect(bomb.rct):
                 # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
@@ -169,11 +170,14 @@ def main():
                 if beam.rct.colliderect(bomb.rct):
                     beam = None
                     bomb = None
+                    bird.change_img(6, screen)
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
-        # beam.update(screen)   
-        bomb.update(screen)
+        if beam is not None:
+            beam.update(screen)
+        if bomb is not None:
+            bomb.update(screen)
         pg.display.update()
         tmr += 1
         clock.tick(50)
