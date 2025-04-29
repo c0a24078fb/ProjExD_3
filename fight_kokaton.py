@@ -207,7 +207,6 @@ def main():
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
 
-        # Beamの表示＆範囲外削除
         new_beams = []
         for beam in beams:
             if beam.update(screen):
